@@ -15,9 +15,15 @@
 	
 	UserDAO dao = new UserDAO();
 	
+	if(dao.가입여부(uid)){
+		out.print("이미 가입한 회원입니다.<p><a href=signup.html>뒤로가기</a></p>");
+		return ;
+	}
+	
 	if(dao.insert(uid, upass, uname)){
 		out.print("회원 가입이 완료되었습니다.");
 	}else{
 		out.print("오류가 발생하였습니다. ");
 	}
+	
     %>
