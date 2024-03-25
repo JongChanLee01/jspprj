@@ -68,7 +68,7 @@ request.setCharacterEncoding("UTF-8");
 
     FeedDAO dao = new FeedDAO();
     if (dao.insert(uid, ucon, ufname)) {
-        response.sendRedirect("main.jsp");
+        response.sendRedirect("main2.jsp");
     }
     else {
         out.print("작성 글의 업로드 중 오류가 발생하였습니다.");

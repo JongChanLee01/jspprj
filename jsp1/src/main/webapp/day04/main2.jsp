@@ -32,11 +32,17 @@
 	str += "</td></tr>";
 
 	for (FeedObj feed : feeds) {
+		String img = feed.getImages(), imgstr = "";
+        if (img != null) {
+            imgstr = "<img src='/images/" + img + "' width=240>";
+        }    
+        
 		str += "<tr><td colspan=2><hr></td></tr>";
 		str += "<tr>";
 		str += "<td><small>" + feed.getId() + "</small></td>";
 		str += "<td><small>&nbsp;(" + feed.getTs() + ")</small></td>";
 		str += "</tr>";
+		str += "<tr><td colspan=2>" + imgstr + "</td></tr>";
 		str += "<tr><td colspan=2>" + feed.getContent() + "</td></tr>";
 	}
 	str += "</table>";
