@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
+
 public class UserDAO {
 	Connection conn = null;
 	PreparedStatement psmt = null;
@@ -41,12 +43,14 @@ public class UserDAO {
 		
 	}
 	
-	public boolean 가입여부(String uid) throws ClassNotFoundException, SQLException {
+	public boolean 가입여부(String uid) throws ClassNotFoundException, SQLException, NamingException {
 		
-		open();
+		// open();
 		
 		try {
 			String sql = "SELECT id FROM user WHERE id=?";
+			
+			conn = ConnectionPool.get();
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, uid);
@@ -60,12 +64,14 @@ public class UserDAO {
 	}
 	
 	
-	public boolean 회원삭제(String uid) throws ClassNotFoundException, SQLException {
+	public boolean 회원삭제(String uid) throws ClassNotFoundException, SQLException, NamingException {
 		
-		open();
+		// open();
 		
 		try {
 			String sql = "DELETE FROM user WHERE id=?";
+			
+			conn = ConnectionPool.get();
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, uid);
