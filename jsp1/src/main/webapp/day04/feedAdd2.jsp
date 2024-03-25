@@ -1,10 +1,10 @@
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ page import="dao.FeedDAO" %>
 <%
-request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("UTF-8");
 
     String uid = request.getParameter("id");
     String ucon = request.getParameter("content");
@@ -15,11 +15,12 @@ request.setCharacterEncoding("utf-8");
     FeedDAO dao = new FeedDAO();
 
     if (dao.insert(uid, ucon)) {
-        out.print("ÀÛ¼ºÇÏ½Å ±ÛÀÌ ¾÷·ÎµåµÇ¾ú½À´Ï´Ù.");
-        List list = dao.getList();
-        out.print(list);
+    	response.sendRedirect("main2.jsp");
+        //out.print("ìž‘ì„±í•˜ì‹  ê¸€ì´ ì—…ë¡œë“œë˜ì—ˆìŠµë‹ˆë‹¤.");
+        //List list = dao.getList();
+        //out.print(list);
     }
     else {
-        out.print("ÀÛ¼º ±ÛÀÇ ¾÷·Îµå Áß ¿À·ù°¡ ¹ß»ýÇÏ¿´½À´Ï´Ù.");
+        out.print("ìž‘ì„± ê¸€ì˜ ì—…ë¡œë“œ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
     }
 %>
