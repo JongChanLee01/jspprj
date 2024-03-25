@@ -60,6 +60,9 @@ request.setCharacterEncoding("UTF-8");
             if (name.equals("image")) {
                 ufname = item.getName();
                 ufile = item.get();
+                
+                // root는 경로를 원하는 곳으로 해도됨 대신 유틸, 메인파일 등 경로들을 다시 설정해 주어야함
+                // String root = "경로"
                 String root = application.getRealPath(java.io.File.separator);
                 FileUtil.saveImage(root, ufname, ufile);
             }
