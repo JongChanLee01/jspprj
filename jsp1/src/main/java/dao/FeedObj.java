@@ -1,30 +1,28 @@
 package dao;
 
 public class FeedObj {
-	private String id, content, ts;
+	private String id, content, ts, images;
 
-	public FeedObj(String id, String content, String ts) {
+	public FeedObj(String id, String content, String ts, String images) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.ts = ts;
+		this.images = images;
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getContent() {
-		return content;
+		return this.content;
 	}
 
 	public String getTs() {
-		return ts;
+		return this.ts;
 	}
-
-	@Override
-	public String toString() {
-		return "게시글 : [id=" + id + ", content=" + content + ", ts=" + ts + "]"+"<br/>";
+	public String getImages() {
+		return this.images;
 	}
-	
 }
