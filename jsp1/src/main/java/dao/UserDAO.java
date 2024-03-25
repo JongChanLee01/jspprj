@@ -58,5 +58,27 @@ public class UserDAO {
 			close();
 		}
 	}
+	
+	
+	public boolean 회원삭제(String uid) throws ClassNotFoundException, SQLException {
+		
+		open();
+		
+		try {
+			String sql = "DELETE FROM user WHERE id=?";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, uid);
+	
+			int count = psmt.executeUpdate();
+			
+			close();
+			
+			return count==1 ? true:false;
+			
+		}finally {
+			close();
+		}
+	}
 
 }
