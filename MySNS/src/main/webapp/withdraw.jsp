@@ -8,7 +8,8 @@ request.setCharacterEncoding("utf-8");
     
     UserDAO dao = new UserDAO();
     if (dao.exists(uid) == false) {
-        out.print("회원 정보를 찾을 수 없습니다.");
+        //out.print("회원 정보를 찾을 수 없습니다.");
+        out.print("NA");
         return;
     }
     
@@ -21,6 +22,7 @@ request.setCharacterEncoding("utf-8");
         session.removeAttribute("id");
     }
     else {
-        out.print("회원 탈퇴 중 오류가 발생하었습니다.");
+        //out.print("회원 탈퇴 중 오류가 발생하었습니다.");
+        out.print("ER");
     }
 %>

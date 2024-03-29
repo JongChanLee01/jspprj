@@ -16,7 +16,7 @@ var AJAX = {
 				}
 			},
 		};
-		if (isfd) {
+		if (isfd) { // 파일업로드 기능
 			callobj.processData = false;
 			callobj.contentType = false;
 		}
@@ -26,7 +26,7 @@ var AJAX = {
 
 var Page = {
 	init: function(cbfunc, url) {
-		AJAX.call("/session.jsp", null, function(data) {
+		AJAX.call("./session.jsp", null, function(data) {
 			var uid = data.trim();
 			if (uid == "null") {
 				alert("로그인이 필요한 서비스 입니다.");
@@ -35,6 +35,7 @@ var Page = {
 			else {
 				var param = (url == null) ? null : SessionStore.get(url);
 				if (cbfunc != null) cbfunc(uid, param);
+				//if (cbfunc != null) cbfunc(uid);
 			}
 		});
 	},
@@ -43,6 +44,28 @@ var Page = {
 		SessionStore.set(url, param);
 		window.location.href = url;
 	},
+	
+	getUsrobj: function (cbfunc) {
+        AJAX.call("./session.jsp", null, function(data){
+            var ustr = data.trim();
+            var usrobj = (ustr == "null") ? null : JSON.parse(ustr);
+            cbfunc(usrobj);
+        });
+    },
+};
+var Session = {
+    set: function (name, val) {
+        sessionStorage["mysns>"+name] = JSON.stringify(val);
+    },
+    
+    get: function (name) {
+        var str = sessionStorage["mysns>" + name];
+        return (str == null || str == "null") ? null : JSON.parse(str);
+    },
+    
+    clear: function (name) {
+        sessionStorage["mysns>"+name] = null;
+    },
 };
 
 var SessionStore = {

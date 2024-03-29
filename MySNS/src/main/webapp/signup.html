@@ -67,10 +67,12 @@ function signup() {
     
     var usrobj = {id: id, password: ps, name: name, ts: getToday()};
     var params = {id: id, jsonstr: JSON.stringify(usrobj)};
+    var url ="signup.jsp";
     
-    //var url ="jsp/signup.jsp?id=" + id + "&ps=" + ps + "&name=" + name;
-    var url ="/signup.jsp";
+    //var url ="signup.jsp?id=" + id + "&ps=" + ps + "&name=" + name;
+	// var params = {id: id, ps:name};
     AJAX.call(url, params, function(data) {
+    //AJAX.call(url, null, function(data) {
         var code = data.trim();
         if(code == "EX") {
             alert("이미 가입한 회원입니다.");

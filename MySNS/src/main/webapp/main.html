@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/main.css">
 <title>Insert title here</title>
 </head>
-<body>
+<!-- <body>
 	<div class="page-hdr">MySNS</div>
 	<div class="page-body">
 		<div class="page-mnu">
@@ -19,7 +19,27 @@
 			<div class="button" onclick="getNext()">작성글 더보기</div>
 		</div>
 	</div>
+</body> -->
+
+<body>
+    <div class="page-hdr">MySNS</div>
+    <div class="page-body">
+        <div class="page-mnu">
+            <div class="menu" onclick="addFeed()">글쓰기</div>
+            <div class="menu" onclick="showFriends()">친구보기</div>
+            <div class="menu" onclick="showInfo()">내정보</div>
+        </div>
+        
+        <div id="list" class="section">
+        
+        </div>
+        
+        <div class="section mtop-10 mbot-30 pad-24">
+            <div class="button" onclick="getNext()">작성글 더보기</div>
+        </div>
+    </div>
 </body>
+
 </html>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="js/core.js"></script>
@@ -29,17 +49,30 @@ $(document).ready(function() {
 });
 
 var minNo = -1;
+
 var feedList = [];
 var frIds = null;
 function start(uid) {
-    frIds = '"' + uid + '"';
+    /* frIds = '"' + uid + '"';
     AJAX.call("/friendList.jsp", {id: uid}, function(data) {
         var list = JSON.parse(data.trim());
         for (var i=0; i<list.length; i++) {
          frIds += ', "' + list[i].id + '"';
         }
         start2(uid);
+    }); */
+    AJAX.call("/MySNS/main.jsp", null, function(data) {
+        var feeds = JSON.parse(data.trim());
+        show(feeds);
     });
+    
+	/* AJAX.call("/feedGetPage.jsp", null, function(data) {
+        var feeds = JSON.parse(data.trim());
+        if (feeds.length > 0) {
+            minNo = feeds[feeds.length - 1].no;
+        }
+        show(feeds);
+    }); */
 }
 
 function start2(uid) {
@@ -75,6 +108,27 @@ function show(feeds) {
         str += getFeedCode(feeds[i]);
     }
     $("#list").append(str);
+    
+    // 테이블로 할때
+	/* var str = "";
+    for (var i=0; i<feeds.length; i++) {
+        var img = feeds[i].images, imgstr = "";
+        if (img != null) {
+            imgstr = "<img src='images/" + img + "' width=240>";
+        }        
+        var name = feeds[i].id;
+        if (feeds[i].user != null) {
+         name = feeds[i].user.name;
+        }
+        str += "<tr><td colspan=2><hr></td></tr>";
+        str += "<tr>";
+        str += "<td><small>" + name + "</small></td>";
+        str += "<td><small>&nbsp;(" + feeds[i].ts + ")</small></td>";
+        str += "</tr>";
+        str += "<tr><td colspan=2>" + imgstr + "</td></tr>";
+        str += "<tr><td colspan=2>" + feeds[i].content + "</td></tr>";
+    }
+    $("#list").append(str); */
 }
 
 function getFeedCode(feed) {
@@ -86,14 +140,14 @@ function getFeedCode(feed) {
         str += "<div class='photo'></div>";
     }
     else {
-        var imgstr = "images/" + feed.user.images[0];
+        var imgstr = "/MySNS/images/" + feed.user.images[0];
         str += "<div class='photo' style='background-image: url(\"" + imgstr + "\")'></div>";
     }
     str += "<div class='name'>" + name + "</div>";
     str += "</div>";
 
     if (feed.images != null) {
-        var imgstr = "images/" + feed.images[0];
+        var imgstr = "/MySNS/images/" + feed.images[0];
         str += "<div class='image' style='background-image: url(\"" + imgstr + "\")'></div>";
     }
     str += "<div class='text'>" + feed.content + "</div>";
@@ -123,6 +177,19 @@ function getNext() {
         DataCache.set("mainCache", feedList);
         show(feeds);
     });
+    
+	/* if (minNo <= 1) {
+        alert("더이상 작성글이 존재하지 않습니다.");
+        return;
+    }
+    var params = {limit: minNo};
+    AJAX.call("jsp/feedGetPage.jsp", params, function(data) {
+        var feeds = JSON.parse(data.trim());
+        if (feeds.length > 0) {
+            minNo = feeds[feeds.length - 1].no;
+        }
+        show(feeds);
+    }); */
 }
 
 function addFeed() {

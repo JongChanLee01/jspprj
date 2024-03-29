@@ -4,6 +4,9 @@
 <%@ page import="java.util.*"%>
 <%@ page import="dao.*"%>
 <%
+    out.print((new FeedDAO()).getList());
+%>
+<%-- <%
 	String uid = (String) session.getAttribute("id");
 	if (uid == null) {
 		response.sendRedirect("login.html");
@@ -34,4 +37,4 @@
 	}
 	str += "</table>";
 	out.print(str);
-%>
+%> --%>
