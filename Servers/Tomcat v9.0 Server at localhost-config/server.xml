@@ -160,7 +160,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="MySNS" path="/MySNS" reloadable="true" source="org.eclipse.jst.jee.server:MySNS"/><Context docBase="example01" path="/example01" reloadable="true" source="org.eclipse.jst.jee.server:example01"/><Context docBase="student" path="/student" reloadable="true" source="org.eclipse.jst.jee.server:student"/><Context docBase="student1" path="/student1" reloadable="true" source="org.eclipse.jst.jee.server:student1"/><Context docBase="Ajax" path="/Ajax" reloadable="true" source="org.eclipse.jst.jee.server:Ajax"/><Context docBase="book" path="/book" reloadable="true" source="org.eclipse.jst.jee.server:book"/></Host>
+      <Context docBase="MySNS" path="/MySNS" reloadable="true" source="org.eclipse.jst.jee.server:MySNS"/><Context docBase="example01" path="/example01" reloadable="true" source="org.eclipse.jst.jee.server:example01"/><Context docBase="student" path="/student" reloadable="true" source="org.eclipse.jst.jee.server:student"/><Context docBase="student1" path="/student1" reloadable="true" source="org.eclipse.jst.jee.server:student1"/><Context docBase="Ajax" path="/Ajax" reloadable="true" source="org.eclipse.jst.jee.server:Ajax"/><Context docBase="book" path="/book" reloadable="true" source="org.eclipse.jst.jee.server:book"/><Context docBase="webexam" path="/webexam" reloadable="true" source="org.eclipse.jst.jee.server:webexam"/></Host>
     </Engine>
   </Service>
 </Server>

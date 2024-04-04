@@ -23,7 +23,7 @@ public class BookDAO {
 
 	public static List<Book> findAll() throws Exception {
 		String sql = "SELECT b.*, c.categoryName " + " FROM book b LEFT JOIN category c ON b.categoryId = c.id";
-		try (Connection connection = DB.getConnection("book");
+		try (Connection connection = DB.getConnection("book2");
 				PreparedStatement statement = connection.prepareStatement(sql);
 				ResultSet resultSet = statement.executeQuery()) {
 			ArrayList<Book> list = new ArrayList<Book>();
@@ -36,7 +36,7 @@ public class BookDAO {
 	public static Book findByName(String title) throws Exception {
 		String sql = "SELECT b.*, c.categoryName " + " FROM book b LEFT JOIN category c ON b.categoryId = c.id "
 				+ " WHERE b.title = ?";
-		try (Connection connection = DB.getConnection("book");
+		try (Connection connection = DB.getConnection("book2");
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, title);
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -51,7 +51,7 @@ public class BookDAO {
 	public static Book findById(int id) throws Exception {
 		String sql = "SELECT b.*, c.categoryName " + " FROM book b LEFT JOIN category c ON b.categoryId = c.id "
 				+ " WHERE b.id = ?";
-		try (Connection connection = DB.getConnection("book");
+		try (Connection connection = DB.getConnection("book2");
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setInt(1, id);
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -65,7 +65,7 @@ public class BookDAO {
 
 	public static void insert(Book book) throws Exception {
 		String sql = "INSERT book (title, author, categoryId, price, publisher)" + " VALUES (?, ?, ?, ?, ?)";
-		try (Connection connection = DB.getConnection("book");
+		try (Connection connection = DB.getConnection("book2");
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, book.getTitle());
 			statement.setString(2, book.getAuthor());
@@ -78,7 +78,7 @@ public class BookDAO {
 
 	public static void update(Book book) throws Exception {
 		String sql = "UPDATE book SET title=?, author=?, categoryId=?, price=?, publisher=? " + " WHERE id = ?";
-		try (Connection connection = DB.getConnection("book");
+		try (Connection connection = DB.getConnection("book2");
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, book.getTitle());
 			statement.setString(2, book.getAuthor());
@@ -92,7 +92,7 @@ public class BookDAO {
 
 	public static void delete(int id) throws Exception {
 		String sql = "DELETE FROM book WHERE id = ?";
-		try (Connection connection = DB.getConnection("book");
+		try (Connection connection = DB.getConnection("book2");
 				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setInt(1, id);
 			statement.executeUpdate();
